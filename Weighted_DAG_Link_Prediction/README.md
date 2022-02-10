@@ -1,5 +1,5 @@
 # Link predictions of weighted directed acyclic graphs
 The algorithm is impementation of the patent pending method titled [Entity resource recommendation system based on interaction vectorization](https://patentimages.storage.googleapis.com/0a/ed/f5/47c57355c3ef30/US20200151597A1.pdf). The method is based of off [GloVe](https://nlp.stanford.edu/pubs/glove.pdf) and [Complex Embeddings for Simple Link Prediction](https://arxiv.org/pdf/1606.06357.pdf) which seeks to minimize 
 ```math
-||embed1*Matrix*embed2.T - E[log(weight)] ||
+|| \vec{embed1} \cdot Matrix \vec{embed2}^T - \mathbb{E}[\log(weight)] ||
 ```
