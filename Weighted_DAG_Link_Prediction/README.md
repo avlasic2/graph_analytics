@@ -6,3 +6,5 @@ The algorithm is impementation of the patent pending method titled [Entity resou
 by learning the embeddings of each node (embedx) and the linear operator (Matrix) by considering the temporal graph over a fixed period of time. The temporal nature of the graph is captured by calculating the expected logarithmic weight. The linear operator captures the nature of the underlying asymmetric interaction of the nodes. 
 
 This technique can be extended to a heterogeneous graph by learning a different linear operator for each node type with respect to source node and target node. 
+
+For the test script that displays how to use the algorithm, the data was taken from [SNAP](https://snap.stanford.edu/) and is the [Bitcoin Alpha trust weighted signed network](https://snap.stanford.edu/data/soc-sign-bitcoin-alpha.html) data.
