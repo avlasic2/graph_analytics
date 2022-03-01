@@ -7,7 +7,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 class ParseData():
-    def __init__(self, rawdata, isUniform =True  ):
+    def __init__(self, rawdata:np.ndarray, isUniform:bool=True  ):
         super().__init__()
         self.elementToIndice = {}
         self.pairsWeightsArray = None
@@ -61,9 +61,9 @@ class ParseData():
 
     def saveResults(
              self
-             , filePath
-             , elementToIndiceFile = 'Element_Indice_Dictionary'
-             , pairsWeightsArrayFile = 'Training_Data'
+             , filePath:str
+             , elementToIndiceFile:str='Element_Indice_Dictionary'
+             , pairsWeightsArrayFile:str='Training_Data'
         ):
          with open( os.path.join( filePath, f'{elementToIndiceFile}.pkl'), 'wb') as f:
              pickle.dump( self.elementToIndice , f)

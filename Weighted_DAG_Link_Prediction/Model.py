@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import numpy as np
 
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
@@ -8,11 +9,11 @@ from tqdm import tqdm
 class EmbedClass(nn.Module):
     def __init__(
             self
-            , dimensionEmbed
-            , numberElements
-            , sourceIndices
-            , targetIndices
-            , weights
+            , dimensionEmbed:int
+            , numberElements:int
+            , sourceIndices:np.ndarray
+            , targetIndices:np.ndarray
+            , weights:np.ndarray
         ):
         super().__init__()
         self.embedVectors = nn.Parameter(
@@ -28,19 +29,19 @@ class EmbedClass(nn.Module):
 
     def _loss(
             self
-            , source
-            , target
-            , weight
-            , bias
-            , matrixOperator
-        ):
+            , source:np.ndarray
+            , target:np.ndarray
+            , weight:np.ndarray
+            , bias:np.ndarray
+            , matrixOperator:np.ndarray
+        )->np.ndarray:
         return torch.mean( torch.pow( torch.diag( source.mm( matrixOperator.mm( target.t() ) ) , 0)  - weight - bias, 2) )
 
     def _train(
             self
-            , num_epoch
-            , batch_size = 512
-            , learning_rate = 0.05
+            , num_epoch:int
+            , batch_size:int = 512
+            , learning_rate:float = 0.05
         ):
         dataSet = SourceTargetDataSet(
               sourceIndices = self._sourceIndices
@@ -74,11 +75,11 @@ class EmbedClass(nn.Module):
 class SourceTargetDataSet(Dataset):
     def __init__(
             self
-            , sourceIndices
-            , targetIndices
-            , embeddings
-            , weights
-            , bias
+            , sourceIndices:np.ndarray
+            , targetIndices:np.ndarray
+            , embeddings:np.ndarray
+            , weights:np.ndarray
+            , bias:np.ndarray
         ):
         self._sourceIndices = sourceIndices
         self._targetIndices = targetIndices
@@ -88,7 +89,7 @@ class SourceTargetDataSet(Dataset):
         self._sourceIndices = sourceIndices
         self._targetIndices = targetIndices
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx:int):
         return self._embeddings[ self._sourceIndices[idx] ] \
             , self._embeddings[ self._targetIndices[idx]] \
             , self._weights[idx] \

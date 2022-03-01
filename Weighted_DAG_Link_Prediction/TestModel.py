@@ -31,6 +31,6 @@ model = EmbedClass(
 )
 
 
-model._train( num_epoch = 20 )
+model._train( num_epoch = 30 )
 
 
